@@ -5,17 +5,23 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    [SerializeField] private HealthBar energy;
 
     bool isShooting = false;
     public float fireDelay = 0.25f;
     float cooldownTimer = 0;
+    float currentEnergy;
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetButton("Fire1"))
         {
-            isShooting = true;
+            currentEnergy = energy.getCurrentPercent();
+            if (currentEnergy > 0)
+            {
+                isShooting = true;
+            }            
         }
         else
         {
@@ -31,6 +37,8 @@ public class PlayerShoot : MonoBehaviour
         {
             cooldownTimer = fireDelay;
             Instantiate(bulletPrefab,transform.position, transform.rotation);
+            currentEnergy -= .8f;
+            energy.updateEnergy(currentEnergy);
         }
     }
 }

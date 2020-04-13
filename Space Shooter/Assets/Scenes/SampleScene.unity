@@ -526,8 +526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b95144e69a137449bbe6659f2b1a175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  MaxHealth: 4
 --- !u!1 &923942312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,8 +1118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b95144e69a137449bbe6659f2b1a175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  MaxHealth: 0
 --- !u!4 &1506437838
 Transform:
   m_ObjectHideFlags: 0
@@ -1419,6 +1415,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5320493615623335038, guid: 07cdbff18c5719249a126d85e8a6e925,
+        type: 3}
+      propertyPath: energy
+      value: 
+      objectReference: {fileID: 913515223}
     m_RemovedComponents:
     - {fileID: 5320493615623335039, guid: 07cdbff18c5719249a126d85e8a6e925, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 07cdbff18c5719249a126d85e8a6e925, type: 3}

@@ -119,7 +119,7 @@ public class Controller : MonoBehaviour
 
         if (!shieldsEngaged)
         {
-            energy += .5f * Time.deltaTime;
+            energy += .3f * Time.deltaTime;
             if (energy >= 1)
             {
                 energy = 1;
