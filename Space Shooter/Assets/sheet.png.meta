@@ -47,6 +47,9 @@ TextureImporter:
   - first:
       213: 7895150657509526253
     second: missile
+  - first:
+      213: 8580076396684340752
+    second: WhiteSprite
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -469,7 +472,7 @@ TextureImporter:
         width: 14
         height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -477,6 +480,27 @@ TextureImporter:
       bones: []
       spriteID: 0e1fce75f0eb6424189c3f489ae62eb2
       internalID: 7895150657509526253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WhiteSprite
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 930
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 122e72e2423f5ea4fb2de8c342966b11
+      internalID: 8580076396684340752
       vertices: []
       indices: 
       edges: []
