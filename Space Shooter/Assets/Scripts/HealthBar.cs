@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     private Transform bar;
+    private float currentPercent;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +14,13 @@ public class HealthBar : MonoBehaviour
 
     public void updateEnergy(float percent)
     {
-        bar.localScale = new Vector3(percent, 1);
+        currentPercent = percent;
+        bar.localScale = new Vector3(currentPercent, 1);
+    }
+
+    public float getCurrentPercent()
+    {
+        return currentPercent;
     }
 
 

@@ -6,8 +6,8 @@ public class Damage : MonoBehaviour
 {
     public int hp = 1;
     public float damage = 1f;
-    private float invinceTime = 0;
-    private bool isInvincible = false;
+    protected float invinceTime = 0;
+    protected bool isInvincible = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isInvincible == false){
@@ -22,7 +22,7 @@ public class Damage : MonoBehaviour
     }
 
     //Move the onject into a short invincibility time
-    private void invincibility(){
+    protected void invincibility(){
         Debug.Log("Currently Invincible");
         isInvincible = true;
         invinceTime = .5f;
@@ -38,7 +38,7 @@ public class Damage : MonoBehaviour
         }  
     }
 
-    void Die()
+    protected void Die()
     {
         Destroy(gameObject);
     }
