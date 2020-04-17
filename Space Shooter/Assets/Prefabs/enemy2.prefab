@@ -160,3 +160,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LaserPrefab: {fileID: 1363156197000996113, guid: d850f9d17fab9b74db4a7b4d37f8e59d,
     type: 3}
+  shootDelay: 0.25
