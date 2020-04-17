@@ -9,10 +9,20 @@ public class PlayerTracker : MonoBehaviour
     public float delay = .5f;
     private float coolDown = 0;
     private Vector3 playerShip;
+    public bool hasTarget = false;
+    [SerializeField] float shipSpeed;
     // Start is called before the first frame update
     void Start()
     {
         findPlayerObject();
+    }
+    public bool getHasTarget()
+    {
+        return hasTarget;
+    }
+    public float getPlayerY()
+    {
+        return playerShip.x;
     }
 
     void FixedUpdate()
@@ -40,15 +50,23 @@ public class PlayerTracker : MonoBehaviour
             //Go Right
             if (goingRight)
             {
-                pos.x += .3f;
+                pos.x += shipSpeed;
             }
 
             //Go Left
             if (!goingRight)
             {
-                pos.x -= .3f;
+                pos.x -= shipSpeed;
             }
             transform.position = pos;
+        }
+        if(Mathf.Abs( transform.position.x - playerShip.x) <= 0.25f)// || Mathf.Abs( transform.position.x - playerShip.x )>= 0.1)
+        {
+            hasTarget = true;
+        }
+        else
+        {
+            hasTarget = false;
         }
     }
 
