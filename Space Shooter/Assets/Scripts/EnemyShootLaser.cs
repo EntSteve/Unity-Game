@@ -31,7 +31,7 @@ public class EnemyShootLaser : MonoBehaviour
         if (cooldownTimer <= 0 && GameObject.Find("enemy2").GetComponent<PlayerTracker>().hasTarget)
         {
             cooldownTimer += shootDelay;
-            laserOffset = new Vector3(transform.position.x, transform.position.y - .1f); //Spawning in front of ship
+            laserOffset = new Vector3(transform.position.x, transform.position.y - .5f); //Spawning in front of ship
             Instantiate(LaserPrefab, laserOffset, transform.rotation);
         }
     }

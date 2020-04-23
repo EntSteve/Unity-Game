@@ -31,22 +31,36 @@ public class PlayerTracker : MonoBehaviour
         if (coolDown < 0)
         {
             coolDown = 5;
+
             if (trackingPlayer == null)
             {
                 return;
             }
+
             Vector3 pos = transform.position;
             playerShip = trackingPlayer.position;
 
-            if (playerShip.x > pos.x)
-            {
-                goingRight = true;
+            if (!hasTarget){ //Ship idle patrolling
+            //Ship goes left until it hits the left boundry -5f
+                if (pos.x < -5.0f ){//Go right until pos is > 5
+                    goingRight = true;
+                }
+                if (pos.x > 5.0f){
+                    goingRight = false;
+                }
             }
-            else if (playerShip.x < pos.x)
-            {
-                goingRight = false;
+            if (hasTarget){//Tracking the player
+                if (playerShip.x > pos.x)
+                {
+                    goingRight = true;
+                }
+                else if (playerShip.x < pos.x)
+                {
+                    goingRight = false;
+                }
             }
-
+             
+            //This section runs regarless of if it does or does not have a target
             //Go Right
             if (goingRight)
             {
@@ -60,6 +74,7 @@ public class PlayerTracker : MonoBehaviour
             }
             transform.position = pos;
         }
+        //If the player ship is in range
         if(Mathf.Abs( transform.position.x - playerShip.x) <= 0.25f)// || Mathf.Abs( transform.position.x - playerShip.x )>= 0.1)
         {
             hasTarget = true;
