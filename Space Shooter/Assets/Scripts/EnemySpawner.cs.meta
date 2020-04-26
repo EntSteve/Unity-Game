@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 9c7ec39a4cab5654b85333eeaf339ebd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Ship1Prefab: {fileID: 14263054461675869, guid: 2d86394d172c79f46b71b6a92337b23f,
+      type: 3}
+  - Ship2Prefab: {fileID: 7118867463530591778, guid: 604d766367e934f44931652990484c60,
+      type: 3}
+  - Ship3Prefab: {fileID: 523105459377665348, guid: 6228cde4bc75ab94eb8b2c6e5ac2a66e,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
