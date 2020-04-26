@@ -8,9 +8,10 @@ public class PlayerTracker : MonoBehaviour
     private bool goingRight;
     public float delay = 0.5f;
     private float coolDown = 0;
+    public float lossPlayerTime = 1;
     private Vector3 playerShip;
     public bool hasTarget = false;
-    [SerializeField] float shipSpeed;
+    [SerializeField] float shipSpeed = .3f;
     private List<GameObject> otherShips;
     // Start is called before the first frame update
     void Start()
@@ -29,15 +30,21 @@ public class PlayerTracker : MonoBehaviour
 
     void FixedUpdate()
     {
+        lossPlayerTime -= Time.deltaTime;
+        Debug.Log(lossPlayerTime);
+        if (lossPlayerTime < 0)
+        {
+            lossPlayerTime = 3;
+            ShipComunicationNetwork.seePlayer = false;
+        }
         coolDown -= delay;
         if (coolDown < 0)
         {
             coolDown = 5f;
             trackOtherShips();
 
-            if (trackingPlayer == null)
+            if (trackingPlayer == null) // Player is dead
             {
-                ShipComunicationNetwork.seePlayer = false;
                 return;
             }
 
@@ -45,8 +52,8 @@ public class PlayerTracker : MonoBehaviour
             Vector3 pos = transform.position;
             playerShip = trackingPlayer.position;
 
-            if (true)
-            { //Ship idle patrolling!ShipComunicationNetwork.seePlayer
+            if (ShipComunicationNetwork.seePlayer)
+            { //Ship idle patrolling
               //Ship goes left until it hits the left boundry -5f
                 if (pos.x < -5.0f)
                 {//Go right until pos is > 5
@@ -57,13 +64,13 @@ public class PlayerTracker : MonoBehaviour
                     goingRight = false;
                 }
             }
-            if (false)
-            {//Tracking the playerShipComunicationNetwork.seePlayer
-                if (playerShip.x > pos.x)
+            if (!ShipComunicationNetwork.seePlayer)
+            {//Tracking the 
+                if (ShipComunicationNetwork.lastPlayerLocation.x > pos.x)
                 {
                     goingRight = true;
                 }
-                else if (playerShip.x < pos.x)
+                else if (ShipComunicationNetwork.lastPlayerLocation.x < pos.x)
                 {
                     goingRight = false;
                 }
@@ -85,7 +92,7 @@ public class PlayerTracker : MonoBehaviour
                         otherShips.Remove(ship);
                         break;
                     }
-                    if (pos.x > tempLocation - .5f ) //This part needs figured out&& tempLocation < pos.x + shipSpeed
+                    if (pos.x > tempLocation - 1f ) //This part needs figured out&& tempLocation < pos.x + shipSpeed
                     {
                         pos.x -= shipSpeed;//Makes it so it deosn't move
                         goingRight = false;
@@ -108,7 +115,7 @@ public class PlayerTracker : MonoBehaviour
                         break;
                     }
                     
-                    if (pos.x < tempLocation + .5f) //This part needs figured out
+                    if (pos.x < tempLocation + 1f) //This part needs figured out
                     {
                         pos.x += shipSpeed; //Makes it so it doesn't move
                         goingRight = true;
@@ -125,10 +132,10 @@ public class PlayerTracker : MonoBehaviour
             ShipComunicationNetwork.seePlayer = true;
             ShipComunicationNetwork.lastPlayerLocation = playerShip;
         }
-        else
+       else
         {
             hasTarget = false;
-            ShipComunicationNetwork.seePlayer = false;
+            //ShipComunicationNetwork.seePlayer = false;
         }
     }
 
@@ -136,7 +143,6 @@ public class PlayerTracker : MonoBehaviour
     private void trackOtherShips()
     {
         string currentShipType = this.tag;
-        Debug.Log(currentShipType);
         /* switch(currentShipType){
              case "Enemy": 
                  otherShipsReturn = GameObject.FindGameObjectsWithTag("Enemy");
