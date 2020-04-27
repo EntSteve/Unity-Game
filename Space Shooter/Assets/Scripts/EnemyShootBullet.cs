@@ -14,7 +14,7 @@ public class EnemyShootBullet : MonoBehaviour
     void Update()
     {
         cooldownTimer -= Time.deltaTime;
-        if (cooldownTimer <= 0 && GameObject.Find("enemy1").GetComponent<PlayerTracker>().hasTarget)
+        if (cooldownTimer <= 0 && GameObject.FindWithTag("Enemy").GetComponent<PlayerTracker>().hasTarget)
         {
             cooldownTimer += shootDelay;
             offset = new Vector3(transform.position.x, transform.position.y - .5f); //Spawning in front of ship
