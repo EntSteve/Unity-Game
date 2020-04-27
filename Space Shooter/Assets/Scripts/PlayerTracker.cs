@@ -30,13 +30,6 @@ public class PlayerTracker : MonoBehaviour
 
     void FixedUpdate()
     {
-        lossPlayerTime -= Time.deltaTime;
-        Debug.Log(lossPlayerTime);
-        if (lossPlayerTime < 0)
-        {
-            lossPlayerTime = 3;
-            ShipComunicationNetwork.seePlayer = false;
-        }
         coolDown -= delay;
         if (coolDown < 0)
         {
@@ -52,7 +45,7 @@ public class PlayerTracker : MonoBehaviour
             Vector3 pos = transform.position;
             playerShip = trackingPlayer.position;
 
-            if (ShipComunicationNetwork.seePlayer)
+            if (!ShipComunicationNetwork.seePlayer)
             { //Ship idle patrolling
               //Ship goes left until it hits the left boundry -5f
                 if (pos.x < -5.0f)
@@ -64,7 +57,7 @@ public class PlayerTracker : MonoBehaviour
                     goingRight = false;
                 }
             }
-            if (!ShipComunicationNetwork.seePlayer)
+            if (ShipComunicationNetwork.seePlayer)
             {//Tracking the 
                 if (ShipComunicationNetwork.lastPlayerLocation.x > pos.x)
                 {
@@ -86,13 +79,16 @@ public class PlayerTracker : MonoBehaviour
                 foreach (GameObject ship in otherShips)
                 {
                     float tempLocation = 0;
-                    try {
+                    try
+                    {
                         tempLocation = ship.transform.position.x;
-                    }catch{//Otehr ship was destroyed
+                    }
+                    catch
+                    {//Otehr ship was destroyed
                         otherShips.Remove(ship);
                         break;
                     }
-                    if (pos.x > tempLocation - 1f ) //This part needs figured out&& tempLocation < pos.x + shipSpeed
+                    if (pos.x > tempLocation - 1f && pos.x < tempLocation) //This part needs figured out&& tempLocation < pos.x + shipSpeed
                     {
                         pos.x -= shipSpeed;//Makes it so it deosn't move
                         goingRight = false;
@@ -108,14 +104,17 @@ public class PlayerTracker : MonoBehaviour
                 foreach (GameObject ship in otherShips)
                 {
                     float tempLocation = 0f;
-                    try {
-                         tempLocation = ship.transform.position.x;
-                    }catch{//Oterh ship was destroyed
+                    try
+                    {
+                        tempLocation = ship.transform.position.x;
+                    }
+                    catch
+                    {//Oterh ship was destroyed
                         otherShips.Remove(ship);
                         break;
                     }
-                    
-                    if (pos.x < tempLocation + 1f) //This part needs figured out
+
+                    if (pos.x < tempLocation + 1f && pos.x > tempLocation ) //This part needs figured out
                     {
                         pos.x += shipSpeed; //Makes it so it doesn't move
                         goingRight = true;
@@ -125,17 +124,23 @@ public class PlayerTracker : MonoBehaviour
             }
             transform.position = pos;
         }
+
         //If the player ship is in range
         if (Mathf.Abs(transform.position.x - playerShip.x) <= 0.25f)// || Mathf.Abs( transform.position.x - playerShip.x )>= 0.1)
         {
+            Debug.Log("Player is being tracked");
             hasTarget = true;
             ShipComunicationNetwork.seePlayer = true;
             ShipComunicationNetwork.lastPlayerLocation = playerShip;
+            lossPlayerTime = 3;
         }
-       else
+        //Timer to lose the player
+        lossPlayerTime -= Time.deltaTime;
+        if (lossPlayerTime < 0)
         {
+            Debug.Log("Player is NOT being tracked");
             hasTarget = false;
-            //ShipComunicationNetwork.seePlayer = false;
+            ShipComunicationNetwork.seePlayer = false;
         }
     }
 
@@ -175,7 +180,8 @@ public class PlayerTracker : MonoBehaviour
     {
         //Get the player as a GameObject then the transform out of the GameObject
         GameObject player = GameObject.Find("PlayerShip");
-        if (player == null){
+        if (player == null)
+        {
             player = new GameObject();
         }
         trackingPlayer = player.transform;

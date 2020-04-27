@@ -63,6 +63,7 @@ public class EnemySpawner : MonoBehaviour
     {
         pos.x = 4f;
         pos.y = 1.5f;
+        pos.z = -1;
         Instantiate(Ship1Prefab, pos, transform.rotation);
     }
 
@@ -70,6 +71,7 @@ public class EnemySpawner : MonoBehaviour
     {
         pos.x = 4f;
         pos.y = 2.5f;
+        pos.z = -1;
         Instantiate(Ship2Prefab, pos, transform.rotation);
     }
 
@@ -77,6 +79,7 @@ public class EnemySpawner : MonoBehaviour
     {
         pos.x = 4f;
         pos.y = 3.5f;
+        pos.z = -1;
         Instantiate(Ship3Prefab, pos, transform.rotation);
     }
 }
